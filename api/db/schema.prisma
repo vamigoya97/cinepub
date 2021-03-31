@@ -17,8 +17,17 @@ model Location {
   name      String
   capacity  Int
   address   String
-  movies    Screening[]
+  screening Screening[]
   createdAt DateTime    @default(now())
+}
+
+model Screening {
+  id       Int        @id @default(autoincrement())
+  date     String
+  time     String
+  location Location[]
+  movie    Movie      @relation(fields: [movieId], references: [id])
+  movieId  Int
 }
 
 model Movie {
@@ -26,16 +35,6 @@ model Movie {
   title      String
   director   String
   poster_url String
-  locations  Screening[]
+  screening  Screening[]
   createdAt  DateTime    @default(now())
-}
-
-model Screening {
-  id         Int      @id @default(autoincrement())
-  locationId Int
-  locations  Location @relation(fields: [locationId], references: [id])
-  movieId    Int
-  movies     Movie    @relation(fields: [movieId], references: [id])
-
-  @@unique([movieId, locationId])
 }
