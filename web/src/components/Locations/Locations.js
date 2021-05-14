@@ -56,58 +56,94 @@ const LocationsList = ({ locations }) => {
     }
   }
 
+  const addImageWithScreen = (location) => {
+    switch (location.name) {
+        case 'Lagniappe':
+            return('../location-images/lagniappe_screen.png')
+        case 'Wynwood Walls':
+            return('../location-images/wynwood_walls_screen.png')
+        case "Sugar Rooftop":
+            return('../location-images/sugar_rooftop_screen.png')
+        case "SLS Miami Beach":
+            return('../location-images/sls_screen.png')
+        case "Crandon Park":
+            return('../location-images/crandon_park_screen.png')
+        case "Veza Sur Brewing":
+            return('../location-images/veza_brewing_screen.png')
+        default:
+          return('./favicon.png');
+    }
+  }
+
   return (
-    <div className="rw-segment rw-table-wrapper-responsive">
-      <table className="rw-table">
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Capacity</th>
-            <th>Address</th>
-            <th>Created at</th>
-            <th>&nbsp;</th>
-          </tr>
-        </thead>
-        <tbody>
-          {locations.map((location) => (
-            <tr key={location.id}>
-              <td>{truncate(location.id)}</td>
-              <td>{truncate(location.name)}</td>
-              <td>{truncate(location.capacity)}</td>
-              <td>{truncate(location.address)}</td>
-              <td>{timeTag(location.createdAt)}</td>
-              <td>
-                <nav className="rw-table-actions">
-                  <Link
-                    to={routes.location({ id: location.id })}
-                    title={'Show location ' + location.id + ' detail'}
-                    className="rw-button rw-button-small"
-                  >
-                    Show
-                  </Link>
-                  <Link
-                    to={routes.editLocation({ id: location.id })}
-                    title={'Edit location ' + location.id}
-                    className="rw-button rw-button-small rw-button-blue"
-                  >
-                    Edit
-                  </Link>
-                  <a
-                    href="#"
-                    title={'Delete location ' + location.id}
-                    className="rw-button rw-button-small rw-button-red"
-                    onClick={() => onDeleteClick(location.id)}
-                  >
-                    Delete
-                  </a>
-                </nav>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+
+    <div>
+      {locations.map((location) => (
+        <div class="card-1 padding margin medium-width">
+            <div class="flex flex-row space-evenly">
+                <div>
+                    <img className="location-img" src={addImageWithScreen(location)}></img>
+                </div>
+                <div>
+                    <p>{location.name}</p>
+                    <p><b>Address: </b>{location.address}</p>
+                    <p><b>Capacity: </b>{location.capacity}</p>
+                </div>
+            </div>
+        </div>
+      ))}
     </div>
+    // <div className="rw-segment rw-table-wrapper-responsive">
+    //   <table className="rw-table">
+    //     <thead>
+    //       <tr>
+    //         <th>Id</th>
+    //         <th>Name</th>
+    //         <th>Capacity</th>
+    //         <th>Address</th>
+    //         <th>Created at</th>
+    //         <th>&nbsp;</th>
+    //       </tr>
+    //     </thead>
+    //     <tbody>
+    //       {locations.map((location) => (
+    //         <tr key={location.id}>
+    //           <td>{truncate(location.id)}</td>
+    //           <td>{truncate(location.name)}</td>
+    //           <td>{truncate(location.capacity)}</td>
+    //           <td>{truncate(location.address)}</td>
+    //           <td>{timeTag(location.createdAt)}</td>
+    //           <td>
+    //             <nav className="rw-table-actions">
+    //               <Link
+    //                 to={routes.location({ id: location.id })}
+    //                 title={'Show location ' + location.id + ' detail'}
+    //                 className="rw-button rw-button-small"
+    //               >
+    //                 Show
+    //               </Link>
+    //               <Link
+    //                 to={routes.editLocation({ id: location.id })}
+    //                 title={'Edit location ' + location.id}
+    //                 className="rw-button rw-button-small rw-button-blue"
+    //               >
+    //                 Edit
+    //               </Link>
+    //               <a
+    //                 href="#"
+    //                 title={'Delete location ' + location.id}
+    //                 className="rw-button rw-button-small rw-button-red"
+    //                 onClick={() => onDeleteClick(location.id)}
+    //               >
+    //                 Delete
+    //               </a>
+    //             </nav>
+    //           </td>
+    //         </tr>
+    //       ))}
+    //     </tbody>
+    //   </table>
+    // </div>
   )
 }
 
